@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* custom css */
+ .myclass{
+    background-color:red;
+ }
+
+ .btn-indigo{
+   background-color:rgb(90, 34, 245);
+ }
+
+ *{
+   font-family: 'Public Sans', sans-serif;
+
+   
+ }
+ 
