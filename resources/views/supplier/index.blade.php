@@ -5,52 +5,45 @@
         <div>
             <div
                 class="w-64 md:w-full font-serif md:max-w-full block rounded-lg border shadow-lg bg-gray-200 text-start">
-                <div class="flex justify-between w-full">
-                    <div class="py-3 px-6  border-gray-300 bg-gray-400 w-full">
-                        <h4 class="font-bold uppercase">Suppliers</h4>
-                    </div>
+              <div class="flex justify-between w-full bg-gray-400">
+                <div class="py-3 px-6  border-gray-300 w-full font-semibold font-serif uppercase">
+                    <h4 class="font-semibold font-serif">Suppliers</h4>
                 </div>
-                <div class="overflow-x-auto w-max-auto px-4 mt-3">
-
-                    <div class="w-40 md:w-full">
-                        <form class="md:grid md:grid-cols-4 gap-3" method="POST"
-                            action="{{ route('users.suppliers.store') }}">
-                            @csrf
-
-                            <div class="w-52 nt-2 md:w-full">
-                                <x-input-label for="name" :value="__('Name')" />
-                                <x-text-input type="text" id="name" name="name" class="h-8 block w-full p-2"
-                                    value="{{ old('name') }}" required autofocus />
-                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                            </div>
-
-
-                            <div class="w-52 mt-2 md:mt-0 md:w-full">
-                                <x-input-label for="name" :value="__('Phone number')" />
-                                <x-text-input type="number" id="phone" name="phone" class="block w-full h-8"
-                                    value="{{ old('name') }}" required autofocus />
-                                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                            </div>
-
-
-                            <div class="w-52 mt-2 md:mt-0 md:w-full">
-                                <x-input-label for="name" :value="__('Address')" />
-                                <x-text-input type="text" id="address" name="address" class="h-8 block w-full"
-                                    value="{{ old('name') }}" required autofocus />
-                                <x-input-error :messages="$errors->get('address')" class="mt-2" />
-                            </div>
-
-
-                            <div class="mt-2 md:mt-6 rounded w-24 text-md  text-center bg-purple-700 text-white h-8">
-
-                                <button
-                                    class="pt-1.5 pb-1 hover:bg-purple-900 focus:bg-indigo-600 rounded w-24 text-sm  text-center bg-purple-700 text-white">Create</button>
-                            </div>
-                        </form>
+            </div>
+            <form class="w-9/12 mt-3 md:mx-4 mx-2 flex flex-col md:flex-row md:items-center justify-start gap-2" method=" POST" action="{{ route('users.suppliers.store') }}">
+                    @csrf
+                
+                    <div class=" nt-2 md:w-full">
+                        <x-input-label for="name" :value="__('Name')" />
+                        <x-text-input type="text" id="name" name="name" class="block w-full p-2" value="{{ old('name') }}" required
+                            autofocus />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
-
-
-
+                
+                
+                    <div class=" mt-2 md:mt-0 md:w-full">
+                        <x-input-label for="name" :value="__('Phone number')" />
+                        <x-text-input type="number" id="phone" name="phone" class="block w-full" value="{{ old('name') }}" required
+                            autofocus />
+                        <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                    </div>
+                
+                
+                    <div class="mt-2 md:mt-0 md:w-full">
+                        <x-input-label for="name" :value="__('Address')" />
+                        <x-text-input type="text" id="address" name="address" class="block w-full" value="{{ old('name') }}"
+                            required autofocus />
+                        <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                    </div>
+                
+                    <div class="md:mt-5">
+                        <x-primary-button class="block">
+                            {{ __('create') }}
+                        </x-primary-button>
+                    </div>
+                
+                </form>
+                <div class="overflow-x-auto w-max-auto px-4 mt-3">
                     <div class="mb-2 mt-5 overflow-x-auto">
                         <table id="supplierTable" class="w-max-auto table-auto whitespace-no-wrap border-t-4">
                             <thead>

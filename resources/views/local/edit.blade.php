@@ -31,6 +31,16 @@
                         autofocus />
                     <x-input-error :messages="$errors->get('remark')" class="mt-2" />
                 </div>
+                <div class="mt-4 mr-2">
+                    <x-input-label class="mx-2" for="remark" :value="__('Is credit')" />
+                
+                    <select name="credit" class="border-gray-200 rounded-lg md:mt-1">
+                        <option disabled>select condition</option>
+                        <option value="1">true</option>
+                        <option value="0">false</option>
+                    </select>
+                    <x-input-error :messages="$errors->get('remark')" class="mt-2" />
+                </div>
                 <hr class="bg-black">
             
                 <div class="mt-4 flex justify-end">

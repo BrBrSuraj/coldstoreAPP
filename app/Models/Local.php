@@ -15,7 +15,7 @@ class Local extends Model
 {
     use HasFactory, SoftDeletes, Currency, CreateFilter,NepaliDates;
     const UPDATED_AT = NULL;
-    protected $fillable = ['remark', 'weight', 'rate', 'total', 'fy'];
+    protected $fillable = ['remark', 'weight', 'rate', 'total', 'fy','credit'];
 
     protected function formatedWeight(): Attribute
     {

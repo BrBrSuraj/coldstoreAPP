@@ -4,44 +4,51 @@
 
         <div class="block rounded-lg border shadow-lg w-64 md:w-full text-start overflow-hidden bg-gray-200">
             <div class="flex justify-between w-full bg-gray-400">
-                <div class="py-3 px-2  border-gray-300 w-full font-serif font-semibold">
-                    <h4 class="font-semibold">Sold to --> {{ $customer->name }}</h4>
+              <div class="py-3 px-2  border-gray-900 bg-gray-400 w-full flex flex-row gap-2 justify-start items-center">
+                    <h4 class="font-bold text-lg ">Sales Details with</h4>
+                    <span class="font-bold text-lg text-gray-900"> {{$customer->name }}</span>
                 </div>
+            </div>
+            <div class="flex justify-between w-full items-center">
+            
+                <div class="py-3 px-6 items-center  border-gray-300 bg-cool-gray-400 w-full flex flex-col md:flex-row gap-10">
+                    <h1 class="text-white px-2 shadow-md">INFO :</h1>
+                    <h4 class="font-bold uppercase bg-teal-300 px-2 shadow-lg">Sold Weight : {{ $sales->sum('weight')." "."kg." }}
+                    </h4>
+                    <h4 class="font-bold uppercase bg-indigo-300 px-2 shadow-lg">Sales : {{ $sales->sum('total')." "."rs." }}</h4>
+                    <h4 class="font-bold uppercase bg-green-300 px-2 shadow-lg">Received Amount :
+                        {{ $sales->sum('total')." "."rs." }}</h4>
 
-                <a style="" href="{{ route('users.customers.sale_payments.index',$customer) }}"
-                    class="h-min mx-1 my-1 p-2 md:mx-1 md:my-1 md:mr-2 text-centre hover:bg-pink-900 text-sm bg-pink-700 text-white rounded">Received</a>
+                        <a style="" href="{{ route('users.customers.sale_payments.index',$customer) }}"
+                                class="bg-purple-500 px-2 py-1 rounded-lg hover:bg-purple-900 text-white">Go to Customer's Payment</a>
+                </div>
             </div>
 
-            <div class="pl-3 md:mx-5 w-60 md:w-full">
-                <form class="md:grid md:grid-cols-3 gap-4" method="POST"
-                    action="{{ route('users.customers.sales.store',$customer) }}">
-                    @csrf
-
-                    <div class="md:mt-4 md:mb-6 mt-2 mb-2">
-                        <x-input-label for="name" :value="__('Weight')" />
-
-                        <x-text-input type="number" step="any" id="weight" name="weight" class="h-8 block w-full"
-                            value="{{ old('weight') }}" required autofocus />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div>
-
-
-                    <div class="md:mt-4 md:mb-6 mt-4 mb-6">
-                        <x-input-label for="name" :value="__('Rate')" />
-
-                        <x-text-input type="number" step="any" id="rate" name="rate" class="h-8 block w-full"
-                            value="{{ old('rate') }}" required autofocus />
-                        <x-input-error :messages="$errors->get('rate')" class="mt-2" />
-                    </div>
-
-
-                    <div class="w-24 md:mt-9">
-                        <x-primary-button class="text-sm block w-500">
-                            {{ __('Sale') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-            </div>
+            <form class="mt-2 md:mx-3 mx-2 flex flex-col md:flex-row justify-start gap-4" method="POST"
+              action="{{ route('users.customers.sales.store',$customer) }}">
+                @csrf
+            
+                <div class="">
+                    <x-text-input placeholder="Enter Weight" type="number" step="any" id="weight" name="weight" class="block w-full"
+                        value="{{ old('weight') }}" required autofocus />
+                    <x-input-error :messages="$errors->get('weight')" class="mt-2" />
+                </div>
+            
+            
+                <div class="">
+                    <x-text-input placeholder="Enter Rate" type="number" step="any" id="rate" name="rate" class="block w-full"
+                        value="{{ old('rate') }}" required autofocus />
+                    <x-input-error :messages="$errors->get('rate')" class="mt-2" />
+                </div>
+            
+            
+                <div class="mx-1 md:mt-1">
+            
+                    <x-primary-button class="">
+                        {{ __('Sale') }}
+                    </x-primary-button>
+                </div>
+            </form>
      
             <div class="md:mx-4 overflow-x-auto w-max-auto mt-3 px-3">
                 <table id="purcheseTable" class="w-max-auto border-t-4 p-2 font-serif">

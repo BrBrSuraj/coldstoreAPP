@@ -21,9 +21,9 @@ class DashboardController extends Controller
   public function __invoke(Request $request)
   {
 
-    $purchesePayment = Payment::sum('amount');
-    $salePayment = SalePayment::sum('amount');
-    $localPayment = Local::sum('total');
+    $purchesePayment = Payment::withoutGlobalScopes()->sum('amount');
+    $salePayment = SalePayment::withoutGlobalScopes()->sum('amount');
+    $localPayment = Local::withoutGlobalScopes()->where('credit',0)->sum('total');
     $amount = ($salePayment+$localPayment) - $purchesePayment;
     $profit = null;
     $loss = null;
@@ -32,38 +32,14 @@ class DashboardController extends Controller
     }else{
       $loss= (-($amount));
     }
-    $suppliers=Supplier::with('purcheses')->get();
-    $purcheses=Purchese::get();
-    $payments=Payment::get();
-    $customers = Customer::with('sales')->get();
-    $sales = Sale::get();
-    $sale_payments = SalePayment::get();
-    $locals=Local::get();
+    $suppliers=Supplier::withoutGlobalScopes()->with('purcheses')->get();
+    $purcheses=Purchese::withoutGlobalScopes()->get();
+    $payments=Payment::withoutGlobalScopes()->get();
+    $customers = Customer::withoutGlobalScopes()->with('sales')->get();
+    $sales = Sale::withoutGlobalScopes()->get();
+    $sale_payments = SalePayment::withoutGlobalScopes()->get();
+    $locals=Local::withoutGlobalScopes()->get();
     return view('dashboard', compact('suppliers', 'customers','purcheses','sales', 'payments','sale_payments','locals','profit','loss'));
-    // _____________________________________________________
-
-
-    /**
-     * for chart data
-    
-    $purchesesResult = $purcheses->map(function ($item) {
-      $item->data = ['month' => Carbon::parse($item->created_at)->format('M'), 'amount' => $item->total];
-      return $item;
-    })->pluck('data');
-    $dataP = "";
-    foreach ($purchesesResult as $val) {
-      $dataP .= "  [" . $val['month'] . ",     " . $val['amount'] . "],";
-    }
-
-    $salesResult = $sales->map(function ($item) {
-      $item->data = ['month' => Carbon::parse($item->created_at)->format('M'), 'amount' => $item->total];
-      return $item;
-    })->pluck('data');
-    $dataS = "";
-    foreach ($salesResult as $val) {
-      $dataS .= "['".$val['month']."',  ".$val['amount']."],";
-    }
-
-     */
+    // ____________________________________________________
   }
 }

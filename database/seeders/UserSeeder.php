@@ -5,13 +5,12 @@ namespace Database\Seeders;
 use App\Models\Sale;
 use App\Models\User;
 use App\Models\Local;
-use App\Models\Payment;
 use App\Models\Customer;
 use App\Models\Purchese;
 use App\Models\Supplier;
 use App\Models\SalePayment;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 
 class UserSeeder extends Seeder
 {
@@ -32,23 +31,24 @@ class UserSeeder extends Seeder
                 'address' => 'Hetauda 7, Nagsoti',
                 'password' => \bcrypt('password'),
             ])->each(function ($user) {
-                Local::factory(10)->create([
-                    'user_id' => $user->id
+                Local::factory(5)->create([
+                    'user_id' => $user->id,
+                    'credit'=>0,
                 ]);
 
-                Supplier::factory(1)->create([
+                Supplier::factory(5)->create([
                     'user_id' => $user->id,
                 ])->each(function ($supplier) {
-                    Purchese::factory(4)->create([
+                    Purchese::factory(1)->create([
                         'supplier_id' => $supplier->id,
                         'user_id' => $supplier->user_id,
                     ]);
                 });
 
-                Customer::factory(1)->create([
+                Customer::factory(5)->create([
                     'user_id' => $user->id,
                 ])->each(function ($customer) {
-                    Sale::factory(4)->create([
+                    Sale::factory(1)->create([
                         'customer_id' => $customer->id,
                         'user_id' => $customer->user_id,
                     ]);
@@ -66,23 +66,24 @@ class UserSeeder extends Seeder
                     'address' => 'Hetauda 8, kamane',
                     'password' => \bcrypt('password'),
                 ])->each(function ($user) {
-                    Local::factory(20)->create([
-                        'user_id' => $user->id
+                    Local::factory(5)->create([
+                        'user_id' => $user->id,
+                        'credit' => 0,
                     ]);
-                    Supplier::factory(1)->create([
+                    Supplier::factory(5)->create([
                         'user_id' => $user->id,
                     ])->each(function ($supplier) {
-                        Purchese::factory(4)->create([
+                        Purchese::factory(1)->create([
                             'supplier_id' => $supplier->id,
                             'user_id' => $supplier->user_id,
                         ]);
                     });
 
 
-                    Customer::factory(1)->create([
+                    Customer::factory(5)->create([
                         'user_id' => $user->id,
                     ])->each(function ($customer) {
-                        Sale::factory(4)->create([
+                        Sale::factory(1)->create([
                             'customer_id' => $customer->id,
                             'user_id' => $customer->user_id,
                         ]);

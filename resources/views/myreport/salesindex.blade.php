@@ -54,12 +54,12 @@
                                                 @forelse ($sales as $sale)
                                                 <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                         
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
                                                         {{ $count++ }}
                                                     </td>
-                                                    <td class="bg-purple-200 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    <td class="bg-purple-200 px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
                                                     <a href="{{ route('system.salesReports.show',$sale->customer->id) }}"
-                                                        class="bg-purple-200 hover:bg-purple-300 cursor-pointer px-2 py-1.5 rounded text-center">{{ $sale->customer->name }}</a>
+                                                        class="bg-purple-400 hover:text-white hover:bg-purple-400 cursor-pointer px-2 py-1.5 rounded text-center">{{ $sale->customer->name }}</a>
                                         
                                                     </td>
                                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -70,11 +70,11 @@
                                                         {{ $sale->rate." ".'kg.' }}
                                         
                                                     </td>
-                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
                                                         {{$sale->total." ".'rs.' }}
                                                     </td>
                                         
-                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
                                                         {{ $sale->sale_payments()->sum('amount')." ".'rs.' }}
                                                     </td>
                                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

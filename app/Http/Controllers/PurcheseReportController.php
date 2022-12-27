@@ -18,14 +18,10 @@ class PurcheseReportController extends Controller
      */
     public function index()
     {
-        $count=1;
-        $chkid = 1;
-         $purcheses=Purchese::with('supplier','payments')->latest('id')->get();
-      $suppliers=Supplier::with('purcheses','payments')->latest()->get();
-      
-
-
-        return view('myreport.index',compact( 'purcheses','count', 'suppliers','chkid'));
+        $count=1;  
+         $purcheses=Purchese::with('supplier','payments')->get();
+        
+        return view('myreport.index',compact( 'purcheses','count'));
     }
 
     /**
@@ -57,7 +53,7 @@ class PurcheseReportController extends Controller
      */
     public function show($id)
     {
-       
+
         $count = 1;
         $suppliers=Supplier::where('id',$id)->with('payments')->first();
         return view('myreport.show',compact('suppliers','count'));
@@ -99,8 +95,9 @@ class PurcheseReportController extends Controller
 
     public function purchesePaymentList($id){
         $count=1;
-        $supplier=Supplier::where('id',$id)->first();
-        $payments=$supplier->payments;
+        $supplier=Supplier::withoutGlobalScopes()->where('id',$id)->first();
+     
+        $payments=$suppliers->payments;
         return view('myreport.supplierPaymentIndex',compact('supplier','payments','count'));
     }
 }

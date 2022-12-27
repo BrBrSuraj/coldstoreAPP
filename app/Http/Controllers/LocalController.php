@@ -12,14 +12,16 @@ class LocalController extends Controller
     public function index()
     {
         $count=0;
-        $locals=Local::paginate();
+        $locals=Local::latest('id')->get();
         return view('local.index',compact('locals','count'));
     }
 
   
     public function store(StoreLocalRequest $request)
     {
-        Local::create($request->validated()+['total'=>($request->weight*$request->rate)]);
+      
+       Local::create($request->validated()+['total'=>($request->weight*$request->rate)]);
+
         return redirect()->route('users.locals.index')->with(['status'=>'New Local Sale Created.']);
     }
 

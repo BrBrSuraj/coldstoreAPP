@@ -17,10 +17,7 @@ class SalesReportController extends Controller
     public function index()
     {
         $count = 1;
-       
-
         $sales = Sale::with('customer', 'sale_payments')->latest('id')->get();
-       
         return view('myreport.salesindex', compact('sales', 'count'));
     }
 

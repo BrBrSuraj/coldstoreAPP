@@ -27,6 +27,7 @@ class StoreLocalRequest extends FormRequest
             'remark' => 'required|max:20',
             'weight'=>'required|min:1|numeric',
             'rate'=>'required|min:1|numeric',
+            'credit'=>'required',
           
         ];
     }

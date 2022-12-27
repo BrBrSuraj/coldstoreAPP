@@ -17,21 +17,17 @@ trait CreateFilter
         });
 
         self::addGlobalScope(function (Builder $builder) {
-
-            if (
-                request()->routeIs('system.purcheseReports.index')
-                || (request()->routeIs('system.purcheseReports.show'))
-                || (request()->routeIs('system.salesReports.index'))
-                || (request()->routeIs('system.salesReports.show'))
-                || (request()->routeIs('system.purcheseReports/payment'))
-                || (request()->routeIs('system.salesReports/payment'))
-                || (request()->routeIs('dashboard'))
-            ) {
-                $builder->where('deleted_at', null)->latest();
-            } else {
-                $model = $builder->getModel();
+            $model = $builder->getModel();
+            if(request()->routeIs('system.purcheseReports.index')
+             || request()->routeIs('system.salesReports.index')
+                || request()->routeIs('system.purcheseReports.show')
+                || request()->routeIs('system.salesReports.show')
+             ){
+                $builder->where('deleted_at', null)->latest('id');
+            }else{
                 $builder->where('user_id', auth()->id())->where('fy', $model->getFy())->where('deleted_at', null)->latest('id');
             }
+          
         });
     }
 }

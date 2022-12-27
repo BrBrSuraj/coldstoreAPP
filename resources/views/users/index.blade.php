@@ -17,14 +17,15 @@
                                 class="w-8 h-8 text-purple-600 hover:text-purple-900 ">
                                 <path fill-rule="evenodd"
                                     d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
-                                    clip-rule="evenodd" />
-                            </svg></a>
+                                    clip-rule="evenodd" />create
+                            </svg>
+                        </a>
                     </div>
 
                 </div>
 
 
-                <div class="overflow-x-auto w-max-auto  p-3">
+                <div class="overflow-x-auto w-max-auto  p-3 mx-10 mt-5">
                     <table id="myTable" class="w-full table-auto overflow-hidden whitespace-no-wrap border-t-4">
                         <thead class="border-t bg-cool-gray-500 border-b">
                             <tr 

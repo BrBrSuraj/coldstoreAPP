@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('total', 20, 3);
             $table->foreignId('user_id')->constrained();
             $table->string('fy');
+            $table->string('credit');
             $table->softDeletes();
             $table->date('created_at');
         });

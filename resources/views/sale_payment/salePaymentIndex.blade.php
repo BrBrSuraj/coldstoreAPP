@@ -5,34 +5,41 @@
 
         <div class="block rounded-lg border shadow-lg bg-gray-200 w-60 md:w-full">
             <div class="md:flex md:justify-between md:w-full bg-gray-400">
-                <div class="border-gray-300 w-full p-3 font-serif">
-                    <h4 class="font-semibold">Amount received from --> {{ $customer->name }} of specific sale</h4>
+                <div class="py-3 px-2  border-gray-900 bg-gray-400 w-full flex flex-row gap-2 justify-start items-center">
+                    <h4 class="font-bold text-lg ">Payment Details of</h4>
+                    <span class="font-bold text-lg text-gray-900"> {{ $customer->name."'s"." "."specific sale" }}</span>
                 </div>
 
-
             </div>
-            <div class="due flex items-center justify-center p-2 text-red-700 font-bold">
-                <p>Due Amount to Receive: {{ $sale->saleDue()." "."rs." }}</p>
+            <div class=" w-full bg-cool-gray-400 flex flex-col md:flex-row">
+                <div class="py-3 px-6  border-gray-300 w-full flex flex-col md:flex-row gap-5">
+                    <h4 class="shadow-lg bg-red-500 px-2 py-1 rounded-md text-sm md:text-lg font-bold uppercase">Due Amount :{{ $sale->saleDue()." "."rs." }}
+                       
+                    </h4>
+                    <h4 class="shadow-lg bg-green-500 px-2 py-1 rounded-md text-sm md:text-lg font-bold uppercase">Received Amount : {{ $sale_payments->sum('amount')." "."rs." }}
+                     
+                    </h4>
             
-            
-            </div>
+                </div>
 
-            <div class="md:w-full p-1 flex items-center justify-center">
-                <form class="md:flex items-center px-2" method="POST"
+                <form class="flex flex-col md:flex-row gap-2 items-start justify-start mx-6 mb-1 mt-1" method="POST"
                     action="{{ route('users.customers.sales.sale_payments.store',['customer'=>$customer,'sale'=>$sale]) }}">
                     @csrf
-
-                    <div class="w-full">
-                        <x-text-input class="md:w-full" type="number" step="any" id="amount" name="amount" class=" block"
-                            value="{{ old('amount') }}" required autofocus />
-                        <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                
+                    <div class="">
+                        <x-text-input type="number" step="any" id="amount" name="amount" class="" value="{{ old('amount') }}" required
+                            autofocus />
+                        <x-input-error :messages="$errors->get('amount')" class="" />
                     </div>
-                    <button
-                        class="md:ml-3 text-sm ml-0.5  px-2 py-2 md:mt-0 mt-2 rounded bg-purple-600 text-white">Receive</button>
+                    <div class="mt-1">
+                        <x-primary-button class="block">
+                            {{ __('Pay') }}
+                        </x-primary-button>
+                    </div>
                 </form>
             </div>
-          
 
+         
 
             <div class="grid mb-4">
                 <div class="overflow-x-auto w-full col-span-2 mt-1 p-3">
@@ -74,12 +81,6 @@
 
                         </tbody>
                     </table>
-                    <div class="underline px-3 border-t border-gray-300 text-gray-600">
-                        <div class="px-4 text-lg text-green-600 font-semibold tracking-wide
-                                         font-serif uppercase bg-gray-50 border-t sm:grid-cols-9">
-                            Total: {{ $sale_payments->sum('amount') }}
-                        </div>
-                    </div>
                 </div>
 
 

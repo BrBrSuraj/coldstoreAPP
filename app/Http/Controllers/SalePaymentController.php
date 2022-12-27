@@ -93,7 +93,10 @@ class SalePaymentController extends Controller
         $sold = Sale::where('id', $sale)->first();
         $soldPayment = $sold->sale_payments()->sum('amount');
         $due = $sold->total -  $soldPayment;
-
+        $currentFy = $this->getFy();
+        if ($sale->fy != $currentFy) {
+            return \redirect()->route('users.customers.sales.sale_payments.index', $supplier)->with(['error' => "Try to pay other fiscal year purchese."]);
+        }
         /**
          * Update the specified resource in storage.
          *if due is false return with error message

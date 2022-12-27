@@ -5,21 +5,31 @@
 
         <div class="block rounded-lg border shadow-lg bg-gray-200 w-60 md:w-full">
             <div class="flex justify-between w-full bg-gray-300">
-                <div class="py-3 px-2  border-gray-300 w-full">
-                    <h4 class="font-bold">Paid to --> {{ $supplier->name }}</h4>
+               <div class="py-3 px-2  border-gray-900 bg-gray-400 w-full flex flex-row gap-2 justify-start items-center">
+                    <h4 class="font-bold text-lg ">Payment Details of</h4>
+                    <span class="font-bold text-lg text-gray-900"> {{$supplier->name }}</span>
+                </div>
+
+            </div>
+
+           <div class="flex justify-between w-full items-center">
+            
+                <div class="py-3 px-6 items-center  border-gray-300 bg-cool-gray-400 w-full flex flex-col md:flex-row gap-10">
+                    <h1 class="text-white px-2 shadow-md">INFO :</h1>
+                    <h4 class="font-bold uppercase bg-red-500 px-2 shadow-lg rounded text-white">Due Amount :
+                    {{ $supplier->supplierDue()}}
+                    </h4>
+                    <h4 class="font-bold uppercase bg-green-300 px-2 shadow-lg rounded">Paid :
+                      {{ $supplier->payments->sum('amount')." "."rs." }}
+                    </h4>
                 </div>
             </div>
-            @include('payment.paymentform')
-            <div class=" md:flex md:justify-start items-center px-2 w-full">
-                <select id="fiscalYear"
-                    class="bg-gray-50 border mr-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 mt-2 block w-56 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose a fiscal year</option>
-                    <option value="US">United States</option>
-                </select>
+
             
-                <button class="ml-1 text-sm px-2 py-2 md:mt-1 mt-2  rounded-lg bg-green-600 text-white">Search</button>
-            </div>
-            @include('payment.dueInfo')
+           
+            @include('payment.paymentform')
+            
+           
 
            
 

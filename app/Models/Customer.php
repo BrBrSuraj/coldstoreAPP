@@ -34,18 +34,15 @@ class Customer extends Model
         });
 
         self::addGlobalScope(function (Builder $builder) {
+            $model = $builder->getModel();
             if (
                 request()->routeIs('system.purcheseReports.index')
-                || (request()->routeIs('system.purcheseReports.show'))
-                || (request()->routeIs('system.salesReports.index'))
-                || (request()->routeIs('system.salesReports.show'))
-                || (request()->routeIs('system.purcheseReports/payment'))
-                || (request()->routeIs('system.salesReports/payment'))
-                || (request()->routeIs('dashboard'))
+                || request()->routeIs('system.salesReports.index')
+                || request()->routeIs('system.purcheseReports.show')
+                || request()->routeIs('system.salesReports.show')
             ) {
                 $builder->where('deleted_at', null)->latest('id');
             } else {
-                $model = $builder->getModel();
                 $builder->where('user_id', auth()->id())->where('deleted_at', null)->latest('id');
             }
         });

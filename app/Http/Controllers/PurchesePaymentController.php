@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreSupplierPurchesePaymentRequest;
 use App\Http\Requests\UpdateSupplierPurchesePaymentRequest;
 use App\Traits\Currency;
+use App\Traits\NepaliDates;
 
 class PurchesePaymentController extends Controller
 {
-    use Currency;
+    use Currency,NepaliDates;
   
     public function index(Supplier $supplier, Purchese $purchese)
     {
@@ -100,6 +101,10 @@ class PurchesePaymentController extends Controller
         $total = $purchese->total;
         $paid = $purchese->payments()->sum('amount');
         $due = $total - $paid;
+        $currentFy = $this->getFy();
+        if ($purchese->fy != $currentFy) {
+            return \redirect()->route('users.suppliers.purcheses.payments.index', $supplier)->with(['error' => "Try to pay other fiscal year purchese."]);
+        }
         if (!$due) {
             return \redirect()->route('users.suppliers.purcheses.payments.index',['supplier'=>$supplier,'purchese'=>$purchese,'payment'=>$payment])->with(['erroe' => "Due Amount not found !"]);
         }

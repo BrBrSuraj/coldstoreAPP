@@ -24,7 +24,7 @@
 
             <div class="flex flex-col pt-3">
                 <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Total Amount Received</dt>
-                <dd class="text-lg font-semibold">{{formatedNumber($locals->sum('total')) }}
+                <dd class="text-lg font-semibold">{{formatedNumber($locals->where('credit','0')->sum('total')) }}
                     </li>
                 </dd>
             </div>
