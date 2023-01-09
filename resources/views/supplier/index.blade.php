@@ -10,7 +10,7 @@
                     <h4 class="font-semibold font-serif">Suppliers</h4>
                 </div>
             </div>
-            <form class="w-9/12 mt-3 md:mx-4 mx-2 flex flex-col md:flex-row md:items-center justify-start gap-2" method=" POST" action="{{ route('users.suppliers.store') }}">
+            <form class="w-9/12 mt-3 md:mx-4 mx-2 flex flex-col md:flex-row md:items-center justify-start gap-2" method="POST" action="{{ route('users.suppliers.store') }}">
                     @csrf
                 
                     <div class=" nt-2 md:w-full">

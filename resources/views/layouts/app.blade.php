@@ -8,8 +8,6 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         {{-- <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">

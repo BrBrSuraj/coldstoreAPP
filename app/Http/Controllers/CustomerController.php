@@ -56,5 +56,6 @@ class CustomerController extends Controller
 
     public function print(Customer $customer)
     {
+        
     }
 }

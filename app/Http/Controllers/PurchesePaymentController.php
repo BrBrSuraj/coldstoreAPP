@@ -13,8 +13,8 @@ use App\Traits\NepaliDates;
 
 class PurchesePaymentController extends Controller
 {
-    use Currency,NepaliDates;
-  
+    use Currency, NepaliDates;
+
     public function index(Supplier $supplier, Purchese $purchese)
     {
         $count = 0;
@@ -26,7 +26,7 @@ class PurchesePaymentController extends Controller
         return view('payment.purchesePaymentIndex', \compact('purchese', 'supplier', 'payments', 'count'));
     }
 
-    
+
     public function create(Supplier $supplier, Purchese $purchese)
     {
         $due = $purchese->getDueAmount();
@@ -34,7 +34,7 @@ class PurchesePaymentController extends Controller
         return view('payment.purchesePaymentCreate', compact('supplier', 'purchese', 'due'));
     }
 
-  
+
     public function store(StoreSupplierPurchesePaymentRequest $request, Payment $payment, Supplier $supplier, Purchese $purchese)
     {
         $total = $purchese->total;
@@ -53,7 +53,7 @@ class PurchesePaymentController extends Controller
         if ($due && !$paid) {
 
             if ($requestAmount > $due) {
-             
+
                 return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese, 'payment' => $payment])->with(['error' => "Amount Exceded."]);
             }
             if ($requestAmount == $due) {
@@ -80,7 +80,7 @@ class PurchesePaymentController extends Controller
             }
 
             if ($due < ($requestAmount)) {
-              
+
                 return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese, 'payment' => $payment])->with(['error' => "Amount Exceded.Amount"]);
             }
         }
@@ -94,7 +94,7 @@ class PurchesePaymentController extends Controller
         return view('payment.purchesePaymentEdit', compact('supplier', 'purchese', 'payment'));
     }
 
-    
+
     public function update(UpdateSupplierPurchesePaymentRequest $request, Supplier $supplier, Purchese $purchese, Payment $payment)
     {
         $reqAmount = $request->amount;
@@ -106,37 +106,36 @@ class PurchesePaymentController extends Controller
             return \redirect()->route('users.suppliers.purcheses.payments.index', $supplier)->with(['error' => "Try to pay other fiscal year purchese."]);
         }
         if (!$due) {
-            return \redirect()->route('users.suppliers.purcheses.payments.index',['supplier'=>$supplier,'purchese'=>$purchese,'payment'=>$payment])->with(['erroe' => "Due Amount not found !"]);
+            return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese, 'payment' => $payment])->with(['erroe' => "Due Amount not found !"]);
         }
         if ($due) {
             if ($due < $reqAmount) {
-                return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier,'purchese' => $purchese, 'payment' => $payment])->with(['error' => "Amount Exceded."]);
+                return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese, 'payment' => $payment])->with(['error' => "Amount Exceded."]);
             }
             if ($due == $reqAmount) {
                 $payment->update($request->validated());
                 $purchese->update(['status' => 'completed']);
-                return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier,'purchese' => $purchese, 'payment' => $payment])->with(['status' => "payment Completed."]);
+                return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese, 'payment' => $payment])->with(['status' => "payment Completed."]);
             }
 
             if ($due > $reqAmount) {
                 $payment->update($request->validated());
-                return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier,'purchese' => $purchese,  'payment' => $payment])->with(['status' => "Partial payment Completed."]);
+                return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese,  'payment' => $payment])->with(['status' => "Partial payment Completed."]);
             }
         }
     }
 
-    public function destroy(Supplier $supplier,Purchese $purchese,Payment $payment)
+    public function destroy(Supplier $supplier, Purchese $purchese, Payment $payment)
     {
-        $total=$purchese->total;
-        $paid=$purchese->payments()->sum('amount');
-        $due=$total-$paid;
-        if(!$due){
+        $total = $purchese->total;
+        $paid = $purchese->payments()->sum('amount');
+        $due = $total - $paid;
+        if (!$due) {
             return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese,  'payment' => $payment])->with(['error' => "Due Amount Completed. Unable to delete"]);
         }
-        if($due){
-$payment->delete();
+        if ($due) {
+            $payment->delete();
             return \redirect()->route('users.suppliers.purcheses.payments.index', ['supplier' => $supplier, 'purchese' => $purchese,  'payment' => $payment])->with(['status' => "Payment Deleted Successfully"]);
         }
-
     }
 }

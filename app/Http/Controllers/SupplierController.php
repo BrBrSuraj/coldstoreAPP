@@ -28,6 +28,7 @@ class SupplierController extends Controller
 
     public function store(StoreSupplierRequest $request)
     {
+        
         // to store new supplier
         Supplier::create($request->validated());
         return redirect()->route('users.suppliers.index')->with(['status' => 'Supplier Created Successfully.']);
@@ -55,10 +56,11 @@ class SupplierController extends Controller
     }
 
     public function printBilll($customer_id){
+        $count=1;
         $customer=Customer::where('id', $customer_id)->first();
         $sales= $customer->sales()->get();
         $paidAmount=$customer->sale_payments()->sum('amount');
-        return view('print.print',compact('customer','sales','paidAmount'));
+        return view('print.print',compact('customer','sales','paidAmount','count'));
     }
 
 }

@@ -10,40 +10,40 @@
                         <h4 class="font-semibold font-serif">Customers</h4>
                     </div>
                 </div>
-                <form class="mt-2 md:mx-4 mx-2 flex flex-col md:flex-row md:items-center justify-start gap-2 w-9/12" method=" POST"
-                       action="{{ route('users.customers.store') }}">
-                        @csrf
-                    
-                        <div class=" nt-2 md:w-full">
-                            <x-input-label for="name" :value="__('Name')" />
-                            <x-text-input type="text" id="name" name="name" class="block w-full p-2" value="{{ old('name') }}" required
-                                autofocus />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
-                    
-                    
-                        <div class=" mt-2 md:mt-0 md:w-full">
-                            <x-input-label for="name" :value="__('Phone number')" />
-                            <x-text-input type="number" id="phone" name="phone" class="block w-full" value="{{ old('name') }}" required
-                                autofocus />
-                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                        </div>
-                    
-                    
-                        <div class="mt-2 md:mt-0 md:w-full">
-                            <x-input-label for="name" :value="__('Address')" />
-                            <x-text-input type="text" id="address" name="address" class="block w-full" value="{{ old('name') }}" required
-                                autofocus />
-                            <x-input-error :messages="$errors->get('address')" class="mt-2" />
-                        </div>
-                    
-                        <div class="md:mt-5">
-                            <x-primary-button class="block">
-                                {{ __('create') }}
-                            </x-primary-button>
-                        </div>
-                    
-                    </form>
+                <form class="mt-2 md:mx-4 mx-2 flex flex-col md:flex-row md:items-center justify-start gap-2 w-9/12"
+                    method="POST" action="{{ route('users.customers.store') }}">
+                    @csrf
+
+                    <div class=" nt-2 md:w-full">
+                        <x-input-label for="name" :value="__('Name')" />
+                        <x-text-input type="text" id="name" name="name" class="block w-full p-2"
+                            value="{{ old('name') }}" required autofocus />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+
+
+                    <div class=" mt-2 md:mt-0 md:w-full">
+                        <x-input-label for="name" :value="__('Phone number')" />
+                        <x-text-input type="number" id="phone" name="phone" class="block w-full"
+                            value="{{ old('name') }}" required autofocus />
+                        <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                    </div>
+
+
+                    <div class="mt-2 md:mt-0 md:w-full">
+                        <x-input-label for="name" :value="__('Address')" />
+                        <x-text-input type="text" id="address" name="address" class="block w-full"
+                            value="{{ old('name') }}" required autofocus />
+                        <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                    </div>
+
+                    <div class="md:mt-5">
+                        <x-primary-button class="block">
+                            {{ __('create') }}
+                        </x-primary-button>
+                    </div>
+
+                </form>
                 <div class="overflow-x-auto w-max-auto px-4 mt-3">
 
                     <div class="mb-2 mt-5 overflow-x-auto">
@@ -70,16 +70,16 @@
 
                                     <td
                                         class="border px-4 py-3 text-sm text-indigo-900 font-serif font-semibold capitalize md:underline">
-<div class="flex justify-between">
-    <a href="{{ route('users.customers.sales.index',$customer) }}"
-        class="md:bg-cool-gray-300 text-sm text-black hover:text-white px-1 py-1 rounded hover:bg-cool-gray-700">{{ $customer->name }}
-    </a>
-    <span
-        class="w-max-auto bg-green-600 rounded-lg  p-1 text-xs md:text-white">{{ $customer->sales()->count()  
+                                        <div class="flex justify-between">
+                                            <a href="{{ route('users.customers.sales.index',$customer) }}"
+                                                class="md:bg-cool-gray-300 text-sm text-black hover:text-white px-1 py-1 rounded hover:bg-cool-gray-700">{{ $customer->name }}
+                                            </a>
+                                            <span
+                                                class="w-max-auto bg-green-600 rounded-lg  p-1 text-xs md:text-white">{{ $customer->sales()->count()  
         }}</span>
-</div>
+                                        </div>
 
-                                       
+
                                     </td>
 
                                     <td class="border px-4 py-3 text-sm">

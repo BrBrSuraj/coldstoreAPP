@@ -5,22 +5,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coldstore Sales Invoce Print</title>
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
     <body id="body">
-<div class="flex justify-center bg-gray-100 p-2">
-    <button onClick="printbill()"
-        class="px-4 py-2 mr-2   bg-green-100 hover:bg-green-600 hover:text-gray-200">Print</button>
+        <div class="fixed 
+            top-1/5 left-1/2 -mb-5 bg-gray-100">
+            <button onClick="printbill()"
+                class="px-4 py-2 mr-2   bg-green-200 hover:bg-green-700 hover:text-gray-200">Print</button>
 
-    <a href="{{ route('users.customers.index',$customer) }}"
-        class="px-4 py-2 hover:bg-red-600 hover:text-gray-200  bg-red-100">Back</a>
-</div>
+            <a href="{{ route('users.customers.index',$customer) }}"
+                class="px-4 py-2 hover:bg-red-700 hover:text-gray-200  bg-red-200">Back</a>
+        </div>
 
 
         {{-- printArea --}}
-        <div id="printable" class=" flex items-center justify-center min-h-screen bg-gray-100">
+        <div id="printable" class="flex items-center justify-center min-h-screen bg-gray-100">
             <div class="w-3/5 bg-white shadow-lg">
                 <div class="flex justify-between p-4">
                     <div>
@@ -30,7 +30,7 @@
                             confirmation.</p>
                     </div>
 
-                    
+
                     <div class="p-2">
                         <ul class="flex">
 
@@ -48,7 +48,7 @@
                             </li>
                         </ul>
                     </div>
-                    
+
                 </div>
                 <p class="ml-9 font-semibold">Date: {{ today()->format('Y/M/d') }}</p>
                 <div class="w-full h-0.5 bg-indigo-500"></div>
@@ -104,7 +104,7 @@
                                 @foreach ($sales as $sale )
                                 <tr class="whitespace-nowrap">
                                     <td class="px-6 py-4 text-sm text-gray-500">
-                                        1
+                                        {{ $count++ }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-900">
@@ -129,21 +129,21 @@
                                     <tr class="">
                                         <td colspan="3"></td>
                                         <td class="text-sm font-bold">Total</td>
-                                        <td class="text-sm font-bold tracking-wider"><b>{{ $sales->sum('total') }}</b>
+                                        <td class="text-sm font-bold tracking-wider"><b>{{ $sales->sum('total')." "."rs." }}</b>
                                         </td>
                                     </tr>
 
                                     <tr class="">
                                         <td colspan="3"></td>
                                         <td class="text-sm font-bold">Paid Amount</td>
-                                        <td class="text-sm font-bold tracking-wider"><b>{{ $paidAmount }}</b></td>
+                                        <td class="text-sm font-bold tracking-wider"><b>{{ $paidAmount." "."rs." }}</b></td>
                                     </tr>
 
                                     <tr class="">
                                         <td colspan="3"></td>
                                         <td class="text-sm font-bold border-t-2">Grand Total</td>
                                         <td class="border-t-2 text-sm font-bold tracking-wider">
-                                            <b>{{ $sales->sum('total')-$paidAmount }}</b>
+                                            <b>{{ $sales->sum('total')-$paidAmount." "."rs." }}</b>
                                         </td>
                                     </tr>
                                 </div>
@@ -172,9 +172,9 @@
                 </div>
                 <div class="w-full h-0.5 bg-indigo-500"></div>
             </div>
-           
+
         </div>
-     
+
 
         <script>
             function printbill(){

@@ -68,8 +68,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['prefix'=>'system','as'=>'system.'],function(){
-      
-
         Route::resource('purcheseReports',PurcheseReportController::class);
         Route::resource('salesReports', SalesReportController::class);
     });
