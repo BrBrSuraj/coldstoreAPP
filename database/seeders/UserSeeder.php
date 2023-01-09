@@ -21,8 +21,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        
-        User::withoutEvents(function(){
+
+        User::withoutEvents(function () {
             User::create([
                 'role_id' => 1,
                 'name' => 'Subash Kattel',
@@ -32,28 +32,28 @@ class UserSeeder extends Seeder
                 'password' => \bcrypt('password'),
             ]);
             // ->each(function ($user) {
-                // Local::factory(5)->create([
-                //     'user_id' => $user->id,
-                //     'credit'=>0,
-                // ]);
+            // Local::factory(5)->create([
+            //     'user_id' => $user->id,
+            //     'credit'=>0,
+            // ]);
 
-                // Supplier::factory(5)->create([
-                //     'user_id' => $user->id,
-                // ])->each(function ($supplier) {
-                //     Purchese::factory(1)->create([
-                //         'supplier_id' => $supplier->id,
-                //         'user_id' => $supplier->user_id,
-                //     ]);
-                // });
+            // Supplier::factory(5)->create([
+            //     'user_id' => $user->id,
+            // ])->each(function ($supplier) {
+            //     Purchese::factory(1)->create([
+            //         'supplier_id' => $supplier->id,
+            //         'user_id' => $supplier->user_id,
+            //     ]);
+            // });
 
-                // Customer::factory(5)->create([
-                //     'user_id' => $user->id,
-                // ])->each(function ($customer) {
-                //     Sale::factory(1)->create([
-                //         'customer_id' => $customer->id,
-                //         'user_id' => $customer->user_id,
-                //     ]);
-                // });
+            // Customer::factory(5)->create([
+            //     'user_id' => $user->id,
+            // ])->each(function ($customer) {
+            //     Sale::factory(1)->create([
+            //         'customer_id' => $customer->id,
+            //         'user_id' => $customer->user_id,
+            //     ]);
+            // });
             // });
 
         });
@@ -73,27 +73,26 @@ class UserSeeder extends Seeder
                 //         'user_id' => $user->id,
                 //         'credit' => 0,
                 //     ]);
-                    // Supplier::factory(5)->create([
-                    //     'user_id' => $user->id,
-                    // ])->each(function ($supplier) {
-                    //     Purchese::factory(1)->create([
-                    //         'supplier_id' => $supplier->id,
-                    //         'user_id' => $supplier->user_id,
-                    //     ]);
-                    // });
-
-
-                    // Customer::factory(5)->create([
-                    //     'user_id' => $user->id,
-                    // ])->each(function ($customer) {
-                    //     Sale::factory(1)->create([
-                    //         'customer_id' => $customer->id,
-                    //         'user_id' => $customer->user_id,
-                    //     ]);
-                    // });
+                // Supplier::factory(5)->create([
+                //     'user_id' => $user->id,
+                // ])->each(function ($supplier) {
+                //     Purchese::factory(1)->create([
+                //         'supplier_id' => $supplier->id,
+                //         'user_id' => $supplier->user_id,
+                //     ]);
                 // });
-            });
 
-       
+
+                // Customer::factory(5)->create([
+                //     'user_id' => $user->id,
+                // ])->each(function ($customer) {
+                //     Sale::factory(1)->create([
+                //         'customer_id' => $customer->id,
+                //         'user_id' => $customer->user_id,
+                //     ]);
+                // });
+                // });
+            }
+        );
     }
 }
